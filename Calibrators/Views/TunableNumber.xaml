@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="Calibrators.Views.TunableNumber"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Calibrators.Views"
+             xmlns:cnvrt="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="200"
+             x:Name="Parent">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+            <Grid Name="g_Holder"
+                  RenderOptions.BitmapScalingMode="HighQuality">
+                <ContentPresenter RecognizesAccessKey="True"
+                                  Margin="{TemplateBinding Padding}">
+                </ContentPresenter>
+            </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransformOrigin" Value="0.5 0.5"></Setter>
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.95" ScaleY="0.95" CenterX="0.5" CenterY="0.5"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.8" ScaleY="0.8" CenterX="0.5" CenterY="0.5"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="g_Holder" Property="Opacity" Value="0.5" />
+                </Trigger>
+                <Trigger Property="TextBlock.FontSize" Value="2">
+                    <Setter TargetName="g_Holder" Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="DoubleArrow.png" Opacity="0.65" Stretch="Uniform"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="TextBlock.FontSize" Value="1">
+                    <Setter TargetName="g_Holder" Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="Arrow.png" Opacity="0.65" Stretch="Uniform"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template" Value="{StaticResource ButtonTemplate}"></Setter>
+            
+            <Setter Property="Height" Value="11"></Setter>
+
+            <Style.Triggers>
+                <Trigger Property="TextBlock.FontSize" Value="1">
+                    <Setter Property="Width" Value="7"></Setter>
+                </Trigger>
+                <Trigger Property="TextBlock.FontSize" Value="2">
+                    <Setter Property="Width" Value="10"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid DataContext="{Binding ElementName=Parent}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid RenderTransformOrigin="0.5 0.5">
+            <Button TextBlock.FontSize="2"
+                    Click="SubBig"></Button>
+            
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
+        
+        <Grid Grid.Column="1" RenderTransformOrigin="0.5 0.5">
+            <Button TextBlock.FontSize="1"
+                    Click="SubSmall"></Button>
+
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Column="2" Width="30">
+            <TextBlock VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Text="{Binding Value, Converter={cnvrt:NullableDoubleToStringInvariantConvertor}}"></TextBlock>
+        </Grid>
+
+        <Button TextBlock.FontSize="1"
+                Grid.Column="3"
+                Click="AddSmall">
+        </Button>
+        <Button TextBlock.FontSize="2"
+                Grid.Column="4"
+                Click="AddBig">
+        </Button>
+    </Grid>
+</UserControl>

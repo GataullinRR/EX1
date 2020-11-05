@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="FilesWidget.DeviceFiles"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FilesWidget"
+             xmlns:controls="clr-namespace:WPFControls;assembly=WPFControls"
+             xmlns:views="clr-namespace:Controls;assembly=Controls"
+             xmlns:conv="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+             xmlns:visualUtils="clr-namespace:WPFUtilities.Types;assembly=WPFUtilities"
+             xmlns:utils="clr-namespace:WPFUtilities;assembly=WPFUtilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Model}">
+        <StackPanel visualUtils:Spacing.Vertical="3" IsEnabled="{Binding IsBusy.IsNotBusy}">
+            <ItemsControl ItemsSource="{Binding FileRequests}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:ReadWriteButtons Header="{Binding Name}"
+                                                Visibility="{Binding IsSupported, Converter={conv:BoolToVisibilityCollapsedConverter}}"
+                                                ReadCommand="{Binding ReadAndSave}"  
+                                                WriteCommand="{Binding Burn}"></views:ReadWriteButtons>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <controls:CheckSelector ValueName="Записывать текущую дату" 
+                                                IsChecked="{Binding WriteCurrentDate}"></controls:CheckSelector>
+        </StackPanel>
+    </Grid>
+</UserControl>

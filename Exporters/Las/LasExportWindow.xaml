@@ -1,0 +1,63 @@
+﻿<Window x:Class="Exporters.Las.LasExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exporters.Las"
+        xmlns:controls="clr-namespace:WPFControls;assembly=WPFControls"
+        xmlns:conv="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+        mc:Ignorable="d"
+        Title="Las экспорт" Height="400" MinWidth="250" Width="250" Name="Parrent">
+
+    <Grid DataContext="{Binding ElementName=Parrent, Path=MainVM}">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding CurveInfos}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Stretch"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="70"></ColumnDefinition>
+                                    <ColumnDefinition Width="19.5"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding Title}"></TextBlock>
+                                <CheckBox Grid.Column="3" IsChecked="{Binding IsShown, Mode=TwoWay}" HorizontalAlignment="Right"></CheckBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        
+        <StackPanel Margin="3" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="3"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Command="{Binding SelectAll}">Выбрать все</Button>
+                <Button Grid.Column="2" Command="{Binding UnselectAll}">Отменить выбор</Button>
+            </Grid>
+
+            <controls:Progress Grid.Row="1" Margin="0 3 0 0" ProgressModel="{Binding ExportProgress}"></controls:Progress>
+
+            <Grid>
+                <Button Grid.Row="999" Margin="0 3 0 0" Command="{Binding Export}">Экспортировать</Button>
+                <Button Grid.Row="999" Margin="0 3 0 0" Command="{Binding Cancel}" 
+                    Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={conv:BoolToVisibilityCollapsedConverter}}">Отменить экспорт</Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+
+</Window>

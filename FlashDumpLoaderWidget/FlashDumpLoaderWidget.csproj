@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2E4C3BC6-94C7-4F9D-AE1C-049CBADD9776}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FlashDumpLoaderWidget</RootNamespace>
+    <AssemblyName>FlashDumpLoaderWidget</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.1.11\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PropertyChanged, Version=2.6.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.2.6.1\lib\net452\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileMappedPointsRowsReadOnlyCollection.cs" />
+    <Compile Include="FlashDataStorageVM.cs" />
+    <Compile Include="FlashDump.cs" />
+    <Compile Include="FlashDumpDataParser.cs" />
+    <Compile Include="FlashDumpDataParserFactory.cs" />
+    <Compile Include="FlashDumpLoad.xaml.cs">
+      <DependentUpon>FLASHDumpLoad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlashDumpLoadVM.cs" />
+    <Compile Include="FlashDumpRowsReader.cs" />
+    <Compile Include="FlashDumpSaverFactory.cs" />
+    <Compile Include="PrefetchSynchronousReaderDecorator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="FLASHDumpLoad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\MVVMUtilities\MVVMUtilitiesStandard\MVVMUtilitiesStandard.csproj">
+      <Project>{559F4B6C-AB97-4508-934A-EC6C028520B9}</Project>
+      <Name>MVVMUtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\NetFrameworkUtilities\NetFrameworkUtilities.csproj">
+      <Project>{42D09205-63B1-4548-B6A6-F6D1569C2631}</Project>
+      <Name>NetFrameworkUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\UtilitiesStandard\UtilitiesStandard.csproj">
+      <Project>{DE0231DB-FFFF-4988-BF22-C1BBAB0A37AD}</Project>
+      <Name>UtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Vectors\Vectors\Vectors.csproj">
+      <Project>{839C7D8A-8283-4969-95DD-5E961AA9F922}</Project>
+      <Name>Vectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFControls\WPFControls.csproj">
+      <Project>{a927cb69-79e4-4d12-9c24-86c70530727a}</Project>
+      <Name>WPFControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFUtilities\WPFUtilities\WPFUtilities.csproj">
+      <Project>{115d86ae-b025-4bad-9932-bef1e9d9f9e8}</Project>
+      <Name>WPFUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataViewExports\DataViewExports.csproj">
+      <Project>{081C920C-30D5-4DFE-8EB1-37D3782003D5}</Project>
+      <Name>DataViewExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj">
+      <Project>{DD073C66-A15A-4295-B882-B04276F716BC}</Project>
+      <Name>DeviceBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlashDumpLoaderExports\FlashDumpLoaderExports.csproj">
+      <Project>{36751930-2B26-4EEB-B0B8-6862E951F4C6}</Project>
+      <Name>FlashDumpLoaderExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HighLevelLoger\Common.csproj">
+      <Project>{8626DFD1-B8D7-444E-BAE4-AFBDB05E5AAD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WidgetHelpers\WidgetHelpers.csproj">
+      <Project>{891FBF8F-A7E5-47CD-B708-E16EBB0487DC}</Project>
+      <Name>WidgetHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\packages\Fody.4.2.1\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.4.2.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.4.2.1\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props'))" />
+  </Target>
+</Project>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4E786174-50D7-4BD4-99A2-94F3B3A1F7E4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Exporters</RootNamespace>
+    <AssemblyName>Exporters</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Las\LasCurvesExporterVM.cs" />
+    <Compile Include="Las\LasExporter.cs" />
+    <Compile Include="Las\LasExportMainVM.cs" />
+    <Compile Include="Las\LasExportWindow.xaml.cs">
+      <DependentUpon>LasExportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Las\LasExportWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\MVVMUtilities\MVVMUtilitiesStandard\MVVMUtilitiesStandard.csproj">
+      <Project>{559F4B6C-AB97-4508-934A-EC6C028520B9}</Project>
+      <Name>MVVMUtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\UtilitiesStandard\UtilitiesStandard.csproj">
+      <Project>{DE0231DB-FFFF-4988-BF22-C1BBAB0A37AD}</Project>
+      <Name>UtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Vectors\Vectors\Vectors.csproj">
+      <Project>{839C7D8A-8283-4969-95DD-5E961AA9F922}</Project>
+      <Name>Vectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFControls\WPFControls.csproj">
+      <Project>{a927cb69-79e4-4d12-9c24-86c70530727a}</Project>
+      <Name>WPFControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFUtilities\WPFUtilities\WPFUtilities.csproj">
+      <Project>{115D86AE-B025-4BAD-9932-BEF1E9D9F9E8}</Project>
+      <Name>WPFUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataViewExports\DataViewExports.csproj">
+      <Project>{081C920C-30D5-4DFE-8EB1-37D3782003D5}</Project>
+      <Name>DataViewExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj">
+      <Project>{DD073C66-A15A-4295-B882-B04276F716BC}</Project>
+      <Name>DeviceBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExportersExports\ExportersExports.csproj">
+      <Project>{ACD063E1-90D6-43CF-8C0B-6130AAAAC043}</Project>
+      <Name>ExportersExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HighLevelLoger\Common.csproj">
+      <Project>{8626DFD1-B8D7-444E-BAE4-AFBDB05E5AAD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

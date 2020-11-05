@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="RUSModuleSetDirrectionWidget.RUSModuleSetDirection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localControls="clr-namespace:Controls;assembly=Controls"
+             xmlns:local="clr-namespace:RUSModuleSetDirrectionWidget"
+             xmlns:devices="clr-namespace:DeviceBase.Devices;assembly=DeviceBase"
+             xmlns:conv="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+             xmlns:visualUtils="clr-namespace:WPFUtilities.Types;assembly=WPFUtilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <!--<UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Command" Value="{Binding SendCommand}"></Setter>
+        </Style>
+    </UserControl.Resources>-->
+    
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Model}">
+        <StackPanel visualUtils:Spacing.Vertical="3">
+            <localControls:EntitiesInputField Entities="{Binding CommandEntities, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" IsEnabled="{Binding IsBusy.IsNotBusy}"></localControls:EntitiesInputField>
+
+            <Button Command="{Binding SendCommand}" CommandParameter="{conv:Command {local:DeviceCommand KEEP_MTF}}">Поддерживать MTF</Button>
+            <Button Command="{Binding SendCommand}" CommandParameter="{conv:Command {local:DeviceCommand ROTATE_WITH_CONSTANT_SPEED}}">Вращаться с постоянной скоростью</Button>
+            <Button Command="{Binding SendCommand}" CommandParameter="{conv:Command {local:DeviceCommand DRILL_DIRECTLY}}">Бурить по прямой</Button>
+            <Button Command="{Binding SendCommand}" CommandParameter="{conv:Command {local:DeviceCommand TURN_ON_AZIMUTH}}">Повернуться на Azi</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

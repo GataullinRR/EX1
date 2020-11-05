@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BEB882DB-886B-4CFB-A3B2-4B4F8B61E1BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VirtualDevice</RootNamespace>
+    <AssemblyName>VirtualDevice</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Devices\FTDIBox.cs" />
+    <Compile Include="Devices\Modulse\RUSModule.cs" />
+    <Compile Include="Devices\Modulse\RUSEMCModuleDevice.cs" />
+    <Compile Include="Devices\Base\VirtualRUSModuleBase.cs" />
+    <Compile Include="FTDIBoxCommandHandlerAttribute.cs" />
+    <Compile Include="FTDIBoxRequestHandlerInfo.cs" />
+    <Compile Include="SalachovCommandHandlerAttribute.cs" />
+    <Compile Include="CRC16CCITT.cs" />
+    <Compile Include="Devices\Base\IRUSModule.cs" />
+    <Compile Include="Devices\InclinometrVirtualDevice.cs" />
+    <Compile Include="Devices\LWDLinkVirtualDevice.cs" />
+    <Compile Include="Devices\Modulse\RUSTechnologicalModuleDevice.cs" />
+    <Compile Include="Devices\ShockSensorVirtualDevice.cs" />
+    <Compile Include="Devices\RotationSensorVirtualDevice.cs" />
+    <Compile Include="MemoryIOStream.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Devices\Base\VirtualRUSDeviceBase.cs" />
+    <Compile Include="RequestHandlerInfo.cs" />
+    <Compile Include="FTDIBoxDeviceSet.cs" />
+    <Compile Include="SalachovDeviceSet.cs" />
+    <Compile Include="WordSerializator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\UtilitiesStandard\UtilitiesStandard.csproj">
+      <Project>{de0231db-ffff-4988-bf22-c1bbab0a37ad}</Project>
+      <Name>UtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TinyConfig\TinyConfig\TinyConfig.csproj">
+      <Project>{05BDF1D9-7BEA-4711-AB5A-115A35CEBF6C}</Project>
+      <Name>TinyConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj">
+      <Project>{dd073c66-a15a-4295-b882-b04276f716bc}</Project>
+      <Name>DeviceBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HighLevelLoger\Common.csproj">
+      <Project>{8626DFD1-B8D7-444E-BAE4-AFBDB05E5AAD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IOBase\IOBase.csproj">
+      <Project>{561AECF2-8B7C-4804-840E-C38D8D1657E6}</Project>
+      <Name>IOBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\ID5 V01 CALIBRATION.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS03-Cal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS03-TCal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS03-FSet.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS09-Cal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS09-DPConf.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS09-FSet.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS07-Cal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS07-DPConf.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS07-FSet.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS07-TCal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS05-Cal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS05-FSet.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS05-DPConf.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS24-Cal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS24-DPConf.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS24-FSet.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS24-TCal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS24-WMode.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS80-Cal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS80-FSet.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS40-Cal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\V01.RUS40-FSet.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

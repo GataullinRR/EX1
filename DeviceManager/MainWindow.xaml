@@ -1,0 +1,148 @@
+﻿<Window x:Class="RUSManagingTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RUSManagingTool"
+        xmlns:controls="clr-namespace:WPFControls;assembly=WPFControls"
+        xmlns:vms="clr-namespace:RUSManagingTool.ViewModels"
+        xmlns:conv="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+        xmlns:visualUtils="clr-namespace:WPFUtilities.Types;assembly=WPFUtilities"
+        xmlns:utils="clr-namespace:WPFUtilities;assembly=WPFUtilities"
+        xmlns:calibViews="clr-namespace:Calibrators.Views;assembly=Calibrators"
+        mc:Ignorable="d"
+        x:Name="Window"
+        Title="RUS-MT V{0}" 
+        Height="700" Width="1100" Icon="geofizika_IL4_icon.ico">
+
+    <Window.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Margin" Value="0 0 0 3"></Setter>
+        </Style>
+
+        <Style x:Key="CollapseButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="14"></Setter>
+            <Setter Property="Width" Value="18"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+            <Setter Property="FontSize" Value="8"></Setter>
+            <Setter Property="Background" Value="LightGray"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+        </Style>
+
+        <vms:MainVM x:Key="MainVM"></vms:MainVM>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource MainVM}" Name="g_Root">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="235"></ColumnDefinition>
+            <ColumnDefinition Width="32"/>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="257" MinWidth="30"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TabControl x:Name="tc_DataWidgets" Grid.Column="6" BorderThickness="0" Background="White">
+
+        </TabControl>
+
+        <Grid Margin="3 3 3 3" Grid.Column="3">
+            <controls:LogControl Grid.Row="1" Entries="{Binding LogVM.Entries}"></controls:LogControl>
+        </Grid>
+
+        <Separator Grid.Column="2" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+
+        <ScrollViewer x:Name="sv_LeftSide" Grid.Column="0" Margin="3 3 3 3" Padding="0 0 3 0" 
+                      VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2"
+                      CanContentScroll="False"
+                      IsDeferredScrollingEnabled="False">
+            <StackPanel>
+                <GroupBox Header="Соединение">
+                    <StackPanel visualUtils:Spacing.Vertical="3">
+                        <controls:OptionSelector GroupName="Порт" 
+                                             IsEnabled="{Binding COMPortVM.Connected, Converter={conv:BoolInvertingConverter}}"
+                                             Options="{Binding COMPortVM.AvailablePorts}"></controls:OptionSelector>
+                        <Grid>
+                            <Button Name="btn_Connect"
+                                Command="{Binding COMPortVM.Connect}"
+                                Visibility="{Binding ElementName=btn_Connect, Path=IsEnabled, Converter={conv:BoolToVisibilityConverter}}">Подсоединиться</Button>
+                            <Button Name="btn_Disconnect"
+                                Command="{Binding COMPortVM.Disconnect}"
+                                Visibility="{Binding ElementName=btn_Disconnect, Path=IsEnabled, Converter={conv:BoolToVisibilityConverter}}">Отсоединиться</Button>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Устройство" IsEnabled="{Binding COMPortVM.Connected}">
+                    <StackPanel visualUtils:Spacing.Vertical="3"
+                                IsEnabled="{Binding DevicesVM.IsBusy.IsNotBusy}">
+                        <ComboBox Name="cb_RootDevice" 
+                                  ItemsSource="{Binding DevicesVM.SupportedDevices}"
+                                  SelectionChanged="cb_RootDevice_SelectionChanged">
+                        </ComboBox>
+                        <ComboBox Name="cb_ChildDevice"
+                                  ItemsSource="{Binding ElementName=cb_RootDevice, Path=SelectedItem.Children}"
+                                  SelectionChanged="cb_ChildDevice_SelectionChanged"></ComboBox>
+                    </StackPanel>
+                </GroupBox>
+
+                <ItemsControl x:Name="ic_controlWidgets" 
+                              ItemsSource="{Binding DevicesVM.SelectedDevice.Widgets.ControlWidgets, Converter={conv:WrappingEnumerableConverter}}"
+                              IsEnabled="{Binding COMPortVM.Connected}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <GroupBox Visibility="{Binding Value.View.Tag, Converter={conv:NotNullToCollapsedConverter}}">
+                                <GroupBox.Header>
+                                    <Grid Margin="0 0 0 2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="5"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Visibility="{Binding Value.View.Visibility, Mode=TwoWay}"
+                                                Style="{StaticResource CollapseButtonStyle}"
+                                                x:Name="btn_Collapse"
+                                                Grid.Column="0"
+                                                Click="Button_Click" Content="➖">
+                                            <Button.Resources>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="CornerRadius" Value="5"/>
+                                                </Style>
+                                            </Button.Resources>
+                                        </Button>
+                                        <Button x:Name="btn_Show" Visibility="{Binding ElementName=btn_Collapse, Path=Visibility, Converter={conv:VisibilityInvertingConverter}, Mode=TwoWay}" 
+                                                Grid.Column="0"
+                                                Style="{StaticResource CollapseButtonStyle}"
+                                                Click="Button_Click" Content="➕">
+                                            <Button.Resources>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="CornerRadius" Value="5"/>
+                                                </Style>
+                                            </Button.Resources>
+                                        </Button>
+                                        <TextBlock Text="{Binding Value.FunctionId.Name}" Grid.Column="2"></TextBlock>
+                                    </Grid>
+                                </GroupBox.Header>
+
+                                <GroupBox.Content>
+                                    <ContentPresenter Content="{Binding Value.View}"></ContentPresenter>
+                                </GroupBox.Content>
+                            </GroupBox>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--<GridSplitter Grid.Column="4" Width="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></GridSplitter>-->
+        <Separator Grid.Column="4" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+    </Grid>
+</Window>

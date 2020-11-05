@@ -1,0 +1,22 @@
+﻿Краткое название прибора:SHOCK___
+Модификация:??
+Версия ПО или пакета данных:01
+Дата составления файла:DD
+Месяц составления файла:MM
+Год составления файла:YY
+Указатель типа файла:F_
+Серийный номер прибора:65535
+Резерв:00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Массив описаний пакета данных[]:Name="SH5O" Position=1 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="SH1O" Position=3 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="SH2O" Position=5 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="SH3O" Position=7 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="SH5R" Position=9 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="SH1R" Position=11 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="SH2R" Position=13 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="SH3R" Position=15 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="ARAD" Position=17 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="AOSV" Position=19 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="ADXU" Position=21 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="ADYU" Position=23 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="ADZU" Position=25 Length=2 NumOfSignificantBits=16 IsSigned=False 

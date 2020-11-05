@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B30C95A6-1A7D-4CD1-85FE-36B45E7A649E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CommandWidget</RootNamespace>
+    <AssemblyName>CommandWidget</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PropertyChanged, Version=2.6.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.2.6.1\lib\net452\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DeviceCommand.xaml.cs">
+      <DependentUpon>DeviceCommand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceCommandVM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="DeviceCommand.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\MVVMUtilities\MVVMUtilitiesStandard\MVVMUtilitiesStandard.csproj">
+      <Project>{559F4B6C-AB97-4508-934A-EC6C028520B9}</Project>
+      <Name>MVVMUtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\UtilitiesStandard\UtilitiesStandard.csproj">
+      <Project>{DE0231DB-FFFF-4988-BF22-C1BBAB0A37AD}</Project>
+      <Name>UtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFControls\WPFControls.csproj">
+      <Project>{a927cb69-79e4-4d12-9c24-86c70530727a}</Project>
+      <Name>WPFControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFUtilities\WPFUtilities\WPFUtilities.csproj">
+      <Project>{115D86AE-B025-4BAD-9932-BEF1E9D9F9E8}</Project>
+      <Name>WPFUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandExports\CommandExports.csproj">
+      <Project>{7CA9F4F8-2375-4940-AFA2-0F6786690B17}</Project>
+      <Name>CommandExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\Controls.csproj">
+      <Project>{0ea7163e-e6e8-4b26-a348-fd31db4c6727}</Project>
+      <Name>Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj">
+      <Project>{DD073C66-A15A-4295-B882-B04276F716BC}</Project>
+      <Name>DeviceBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HighLevelLoger\Common.csproj">
+      <Project>{8626DFD1-B8D7-444E-BAE4-AFBDB05E5AAD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WidgetHelpers\WidgetHelpers.csproj">
+      <Project>{891FBF8F-A7E5-47CD-B708-E16EBB0487DC}</Project>
+      <Name>WidgetHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\packages\Fody.4.2.1\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.4.2.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.4.2.1\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props'))" />
+  </Target>
+</Project>

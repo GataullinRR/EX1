@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="ViewSettingsWidget.DataViewSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:WPFControls;assembly=WPFControls"
+                xmlns:visualUtils="clr-namespace:WPFUtilities.Types;assembly=WPFUtilities"
+             xmlns:local="clr-namespace:ViewSettingsWidget"
+             xmlns:conv="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=Model}">
+        <StackPanel visualUtils:Spacing.Vertical="3">
+            <controls:NameValuePairControl ValueName="Длина оси Y"
+                                           ValueSource="{Binding ViewSetingVM.YAxisLength, Mode=TwoWay}"></controls:NameValuePairControl>
+            <controls:CheckSelector ValueName="Автоскрол"
+                                    Visibility="{Binding ViewSetingVM.IsAutoscrollSupported, Converter={conv:BoolToVisibilityCollapsedConverter}}"
+                                    IsChecked="{Binding ViewSetingVM.IsAutoscrollEnabled, Mode=TwoWay}"></controls:CheckSelector>
+            <controls:CheckSelector ValueName="Автомасштабирование"
+                                    IsChecked="{Binding ViewSetingVM.IsAutoscaleEnabled, Mode=TwoWay}"></controls:CheckSelector>
+            <controls:CheckSelector ValueName="Отображать все кривые"
+                                    IsChecked="{Binding ViewSetingVM.CurveGroupShow, Mode=TwoWay}"></controls:CheckSelector>
+
+            <Expander Header="Выбор отображаемых кривых" Margin="0 0 0 4">
+                <ItemsControl ItemsSource="{Binding StorageVM.PointsSource.CurveInfos}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Stretch"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="44"></ColumnDefinition>
+                                    <ColumnDefinition Width="20"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding Title}"></TextBlock>
+                                <CheckBox Grid.Column="3" IsChecked="{Binding IsShown, Mode=TwoWay}" HorizontalAlignment="Right"></CheckBox>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Expander>
+
+            <Button Margin="0 0 0 3" Command="{Binding StorageVM.Clear}"
+                    Visibility="{Binding ViewSetingVM.IsClearSupported, Converter={conv:BoolToVisibilityCollapsedConverter}}">Очистить</Button>
+
+            <Separator></Separator>
+
+            <ItemsControl ItemsSource="{Binding Exporters}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel visualUtils:Spacing.Vertical="3"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding Export}" Content="{Binding FormatName}"></Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,22 @@
+Краткое название прибора:Bl_Gyro_
+Модификация:??
+Версия ПО или пакета данных:01
+Дата составления файла:DD
+Месяц составления файла:MM
+Год составления файла:YY
+Указатель типа файла:F_
+Серийный номер прибора:65535
+Резерв:00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Массив описаний пакета данных[]:Name="STAT" Position=1 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="SGY1" Position=3 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="SRO1" Position=5 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="ANG1" Position=7 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="TEM1" Position=9 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="SGY2" Position=11 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="SRO2" Position=13 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="ANG2" Position=15 Length=2 NumOfSignificantBits=16 IsSigned=False 
+Массив описаний пакета данных[]:Name="TEM2" Position=17 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="ADSG" Position=19 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="ADH1" Position=21 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="ADH2" Position=23 Length=2 NumOfSignificantBits=15 IsSigned=True 
+Массив описаний пакета данных[]:Name="ADTM" Position=25 Length=2 NumOfSignificantBits=15 IsSigned=True 

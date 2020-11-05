@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Calibrators.Views.InclinometrTemperatureCalibration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Calibrators.Views"
+             xmlns:vms="clr-namespace:Calibrators.ViewModels"
+             xmlns:models="clr-namespace:Calibrators.Models"
+             xmlns:visual="clr-namespace:WPFUtilities.Types;assembly=WPFUtilities"
+             xmlns:converters="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+             xmlns:controls="clr-namespace:WPFControls;assembly=WPFControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="220">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Model}">
+        <StackPanel visual:Spacing.Vertical="3">
+            <ComboBox IsEnabled="{Binding IsBusy.IsBusy, Converter={converters:BoolInvertingConverter}}"
+                      ItemsSource="{Binding Modes}" 
+                      SelectedItem="{Binding SelectedCalibrationMode}"></ComboBox>
+            
+            <Grid>
+                <Button Command="{Binding StartMeasure}">Начать замер</Button>
+                <Button Command="{Binding CancelMeasure}" 
+                        Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={converters:BoolToVisibilityConverter}}">
+                    Прервать замер</Button>
+            </Grid>
+            <Button Command="{Binding FinishMeasure}">Завершить замер</Button>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="3"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Command="{Binding ImportMeasureResults}" >Загрузить</Button>
+                <Button Command="{Binding ExportMeasureResults}" Grid.Column="999">Сохранить</Button>
+            </Grid>
+
+            <controls:ImmutableNameValuePair ValueName="Температура магнитометра" 
+                                             Value="{Binding Calibrator.ActualDeviceParameters.PCBTemperature, Converter={converters:DoubleRoundConvertor}, ConverterParameter={converters:Int32 1}}"></controls:ImmutableNameValuePair>
+            <controls:ImmutableNameValuePair ValueName="Температура акселерометра" 
+                                             Value="{Binding Calibrator.ActualDeviceParameters.GyroTemperature, Converter={converters:DoubleRoundConvertor}, ConverterParameter={converters:Int32 1}}"></controls:ImmutableNameValuePair>
+            <controls:ImmutableNameValuePair ValueName="INC"
+                                             Value="{Binding Calibrator.ActualDeviceParameters.Inclination, Converter={converters:DoubleRoundConvertor}, ConverterParameter={converters:Int32 1}}"></controls:ImmutableNameValuePair>
+            <controls:ImmutableNameValuePair ValueName="AZI"
+                                             Value="{Binding Calibrator.ActualDeviceParameters.Azimuth, Converter={converters:DoubleRoundConvertor}, ConverterParameter={converters:Int32 1}}"></controls:ImmutableNameValuePair>
+            <controls:ImmutableNameValuePair ValueName="GTF"
+                                             Value="{Binding Calibrator.ActualDeviceParameters.Gravity, Converter={converters:DoubleRoundConvertor}, ConverterParameter={converters:Int32 1}}"></controls:ImmutableNameValuePair>
+            <controls:ImmutableNameValuePair ValueName="Статус" Value="{Binding Status}"></controls:ImmutableNameValuePair>
+
+            <Separator></Separator>
+            
+            <Button Command="{Binding SaveCalibrationFile}">Сохранить файл калибровки</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

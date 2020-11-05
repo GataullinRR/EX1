@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D2D0A58-50DC-4B4C-AC9C-8D4B1974C001}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Calibrators</RootNamespace>
+    <AssemblyName>Calibrators</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LIBS\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LIBS\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PropertyChanged, Version=2.6.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.2.6.1\lib\net452\PropertyChanged.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CalibratorsFactory.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="ICalibrator.cs" />
+    <Compile Include="IDataProvider.cs" />
+    <Compile Include="Models\CalibrationFileGenerator.cs" />
+    <Compile Include="Models\Inclinometr\CalibrationConstants.cs" />
+    <Compile Include="Models\Inclinometr\CalibratorApplication.cs" />
+    <Compile Include="Models\CalibratorBase.cs" />
+    <Compile Include="Models\Gyro\GyroTemperatureCalibrator.cs" />
+    <Compile Include="Models\Inclinometr\Curve.cs" />
+    <Compile Include="Models\Inclinometr\InclinometrAngularCalibrator.cs" />
+    <Compile Include="Models\Inclinometr\InclinometrCalibratorBase.cs" />
+    <Compile Include="Models\Inclinometr\InclinometrTemperatureCalibrator.cs" />
+    <Compile Include="Models\Inclinometr\IncMath.cs" />
+    <Compile Include="Models\Inclinometr\TestAngleAttribute.cs" />
+    <Compile Include="Models\MeasureResultBase.cs" />
+    <Compile Include="Models\MnemonicInfo.cs" />
+    <Compile Include="Models\ShockSensor\ShockSensorCalibrator.cs" />
+    <Compile Include="Models\ShockSensor\ShockTestMode.cs" />
+    <Compile Include="Models\ShockSensor\Thresholds.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RUSDeviceDataProviderProxy.cs" />
+    <Compile Include="ViewModels\CalibrationBaseVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\AnglesVM.cs" />
+    <Compile Include="Models\Inclinometr\CalibratedPoint.cs" />
+    <Compile Include="ViewModels\Inclinometr\AngularCalibrationErrorsVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\AngularCalibrationErrorVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\CalibrationErrorsVMBase.cs" />
+    <Compile Include="ViewModels\Inclinometr\ConstantsVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\CurveVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\DeviceDataVM.cs" />
+    <Compile Include="ViewModels\Gyro\GyroTemperatureCalibrationVM.cs" />
+    <Compile Include="ViewModels\Gyro\RotationSpeedVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\AngularCalibrationVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\PlotVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\TemperatureCalibrationErrorVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\TemperatureCalibrationVM.cs" />
+    <Compile Include="Models\IRichProgress.cs" />
+    <Compile Include="ViewModels\Inclinometr\NameValuePairVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\OptionVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\PositionMeasureInfoVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\TemperatureCalibrationErrorsVM.cs" />
+    <Compile Include="ViewModels\Inclinometr\SensorsSetVM.cs" />
+    <Compile Include="ViewModels\ProgressVM.cs" />
+    <Compile Include="ViewModels\ShockSensor\PulseDurationVM.cs" />
+    <Compile Include="ViewModels\ShockSensor\ShockSensorCalibrationVM.cs" />
+    <Compile Include="Views\DoubleValueBinderExtension.cs" />
+    <Compile Include="Views\Common\Chart.xaml.cs">
+      <DependentUpon>Chart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inclinometr\InclinometrAngularCalibrationErrors.xaml.cs">
+      <DependentUpon>InclinometrAngularCalibrationErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inclinometr\CalibrationErrors.xaml.cs">
+      <DependentUpon>CalibrationErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShockSensor\ShockTestModeExtension.cs" />
+    <Compile Include="Views\Gyro\GyroTemperatureCalibrationModeExtension.cs" />
+    <Compile Include="Views\Inclinometr\InclinometrAngularCalibration.xaml.cs">
+      <DependentUpon>InclinometrAngularCalibration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inclinometr\InclinometrTemperatureCalibration.xaml.cs">
+      <DependentUpon>InclinometrTemperatureCalibration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Gyro\GyroTemperatureCalibration.xaml.cs">
+      <DependentUpon>GyroTemperatureCalibration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShockSensor\ShockSensorCalibration.xaml.cs">
+      <DependentUpon>ShockSensorCalibration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inclinometr\InclinometrTemperatureCalibrationErrors.xaml.cs">
+      <DependentUpon>InclinometrTemperatureCalibrationErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TunableNumber.xaml.cs">
+      <DependentUpon>TunableNumber.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\Common\Chart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inclinometr\InclinometrAngularCalibration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inclinometr\InclinometrTemperatureCalibration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Gyro\GyroTemperatureCalibration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inclinometr\InclinometrAngularCalibrationErrors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inclinometr\CalibrationErrors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShockSensor\ShockSensorCalibration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inclinometr\InclinometrTemperatureCalibrationErrors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TunableNumber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\DSPLib\DSPLib\DSPUtilities.csproj">
+      <Project>{32af0e39-defe-411a-b832-3ca1ba7c3633}</Project>
+      <Name>DSPUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\MVVMUtilities\MVVMUtilitiesStandard\MVVMUtilitiesStandard.csproj">
+      <Project>{559f4b6c-ab97-4508-934a-ec6c028520b9}</Project>
+      <Name>MVVMUtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\UtilitiesStandard\UtilitiesStandard.csproj">
+      <Project>{de0231db-ffff-4988-bf22-c1bbab0a37ad}</Project>
+      <Name>UtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Vectors\Vectors\Vectors.csproj">
+      <Project>{839c7d8a-8283-4969-95dd-5e961aa9f922}</Project>
+      <Name>Vectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFControls\WPFControls.csproj">
+      <Project>{a927cb69-79e4-4d12-9c24-86c70530727a}</Project>
+      <Name>WPFControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFUtilities\WPFUtilities\WPFUtilities.csproj">
+      <Project>{115d86ae-b025-4bad-9932-bef1e9d9f9e8}</Project>
+      <Name>WPFUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TinyConfig\SpecificMarshallers\SpecificMarshallers.csproj">
+      <Project>{c81897d7-c103-4191-8d89-acfee3adcf2d}</Project>
+      <Name>SpecificMarshallers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TinyConfig\TinyConfig\TinyConfig.csproj">
+      <Project>{05BDF1D9-7BEA-4711-AB5A-115A35CEBF6C}</Project>
+      <Name>TinyConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj">
+      <Project>{DD073C66-A15A-4295-B882-B04276F716BC}</Project>
+      <Name>DeviceBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HighLevelLoger\Common.csproj">
+      <Project>{8626DFD1-B8D7-444E-BAE4-AFBDB05E5AAD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Do%27s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Arrow.png" />
+    <Resource Include="Views\DoubleArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Do%27s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Dont%27s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dont%27s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Empty.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.4.2.1\build\Fody.targets" Condition="Exists('..\packages\Fody.4.2.1\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.4.2.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.4.2.1\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PropertyChanged.Fody.2.6.1\build\PropertyChanged.Fody.props'))" />
+  </Target>
+</Project>

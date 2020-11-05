@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="CommandWidget.DeviceCommand"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CommandWidget"
+                     xmlns:controls="clr-namespace:WPFControls;assembly=WPFControls"
+            xmlns:conv="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+            xmlns:localControls="clr-namespace:Controls;assembly=Controls"
+            xmlns:visualUtils="clr-namespace:WPFUtilities.Types;assembly=WPFUtilities"
+            xmlns:utils="clr-namespace:WPFUtilities;assembly=WPFUtilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Model}">
+        <StackPanel>
+
+            <localControls:EntitiesInputField IsEnabled="{Binding IsBusy.IsNotBusy}" Entities="{Binding Entities}"></localControls:EntitiesInputField>
+            
+            <ContentPresenter Content="{Binding Widget.View}" Visibility="{Binding Widget, Converter={conv:NullToCollapsedConverter}}"></ContentPresenter>
+            <Separator Margin="0 3 0 0" Visibility="{Binding Widget, Converter={conv:NullToCollapsedConverter}}"></Separator>
+            <ProgressBar Margin="0 3 0 0"  
+                         Height="20" 
+                         Minimum="0" 
+                         Maximum="1" 
+                         Value="{Binding Progress.ProgressInPercents, Mode=OneWay}" 
+                         Visibility="{Binding Progress, Converter={conv:NullToCollapsedConverter}}"></ProgressBar>
+            <Grid Visibility="{Binding Widget, Converter={conv:NullToCollapsedConverter}}">
+                <Button Margin="0 3 0 0" Command="{Binding Cancel}" Visibility="{Binding Widget.Settings.AllowCancelling, Converter={conv:BoolToVisibilityConverter}}">Отменить</Button>
+            </Grid>
+            <Button Command="{Binding Read}" 
+                                    Margin="0 3 0 0"
+                                    Visibility="{Binding IsReadSupported, Converter={conv:BoolToVisibilityCollapsedConverter}}"
+                                    IsEnabled="{Binding IsBusy.IsNotBusy}">Прочитать</Button>
+            <Button Command="{Binding Send}" 
+                                    Margin="0 3 0 0"
+                                    Visibility="{Binding IsSendSupported, Converter={conv:BoolToVisibilityCollapsedConverter}}"
+                                    IsEnabled="{Binding IsBusy.IsNotBusy}">Записать</Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

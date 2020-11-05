@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="Calibrators.Views.ShockSensorCalibration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Calibrators.Views"
+             xmlns:controls="clr-namespace:WPFControls;assembly=WPFControls"
+             xmlns:conv="clr-namespace:WPFUtilities.Converters;assembly=WPFUtilities"
+             xmlns:visual="clr-namespace:WPFUtilities.Types;assembly=WPFUtilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="225"
+             x:Name="Parrent">
+
+    <UserControl.Resources>
+        <Style TargetType="controls:NewNameDoubleValuePairControl">
+            <Setter Property="IsEnabled" 
+                    Value="{Binding IsBusy.IsBusy, Converter={conv:BoolInvertingConverter}}"></Setter>
+        </Style>
+
+        <Style TargetType="controls:NewNewNameValuePairControl">
+            <Setter Property="IsEnabled" Value="{Binding IsBusy.IsNotBusy}"></Setter>
+        </Style>
+
+        <Style TargetType="controls:OptionSelector">
+            <Setter Property="IsEnabled" 
+                    Value="{Binding IsBusy.IsBusy, Converter={conv:BoolInvertingConverter}}"></Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Model}">
+        <StackPanel visual:Spacing.Vertical="3">
+            <Grid>
+                <ProgressBar DataContext="{Binding MeasureProgress}"
+                             Height="20"
+                             Minimum="0"
+                             Maximum="1" 
+                             Value="{Binding ProgressInPercents, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></ProgressBar>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Текущая операция</TextBlock>
+            </Grid>
+            <Button Grid.Column="1" Margin="3 0 0 0" Height="20"
+                        Command="{Binding CancelMeasure}">Прервать</Button>
+            
+            <Separator></Separator>
+
+            <controls:NewNewNameValuePairControl 
+                ValueName="Точек тестирования"
+                ModelValue="{Binding NumOfTestingPoints, Converter={conv:IntToDoubleConverter}}" 
+                Binder="{local:DoubleValueBinder [20:1000], 0}"></controls:NewNewNameValuePairControl>
+            <Button Command="{Binding StartMeasure}" CommandParameter="{conv:Command {local:ShockTestMode XZ}}">Тест оси X, Z</Button>
+            <Button Command="{Binding StartMeasure}" CommandParameter="{conv:Command {local:ShockTestMode Y}}">Тест оси Y</Button>
+
+            <Separator></Separator>
+
+            <Button Command="{Binding SetDefaultThresholds}">Установить пороги по умолчанию</Button>
+            <controls:NewNewNameValuePairControl ValueName="Pr50" 
+                                                 ModelValue="{Binding Calibrator.CurrentThresholds.G50, Mode=TwoWay}" 
+                                                 Binder="{local:DoubleValueBinder [35:45], 2 }"></controls:NewNewNameValuePairControl>
+            <controls:NewNewNameValuePairControl ValueName="Pr100" 
+                                                    ModelValue="{Binding Calibrator.CurrentThresholds.G100, Mode=TwoWay}"  
+                                                    Binder="{local:DoubleValueBinder [70:90], 2 }"></controls:NewNewNameValuePairControl>
+            <controls:NewNewNameValuePairControl ValueName="Pr200" 
+                                                    ModelValue="{Binding Calibrator.CurrentThresholds.G200, Mode=TwoWay}"  
+                                                    Binder="{local:DoubleValueBinder [150:170], 2 }"></controls:NewNewNameValuePairControl>
+            <controls:NewNewNameValuePairControl ValueName="Pr300" 
+                                                    ModelValue="{Binding Calibrator.CurrentThresholds.G300, Mode=TwoWay}"  
+                                                    Binder="{local:DoubleValueBinder [230:260], 2 }"></controls:NewNewNameValuePairControl>
+            <Separator></Separator>
+
+            <controls:OptionSelector Name="os_PulseDuration" GroupName="T импульса" Options="{Binding PulseDurationVM.ImpulseDurations}"></controls:OptionSelector>
+            <Button Command="{Binding StartMeasure}" CommandParameter="{conv:Command {local:ShockTestMode SHOCK-X}}">Ударный тест оси X</Button>
+            <Button Command="{Binding StartMeasure}" CommandParameter="{conv:Command {local:ShockTestMode SHOCK-Y}}">Ударный тест оси Y</Button>
+            <Button Command="{Binding StartMeasure}" CommandParameter="{conv:Command {local:ShockTestMode SHOCK-Z}}">Ударный тест оси Z</Button>
+
+
+
+            <Button Command="{Binding CalculateThresholds}">Рассчитать пороги</Button>
+
+            <Separator></Separator>
+
+            <Button Command="{Binding SaveCalibrationFile}">Сохранить файл калибровки</Button>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

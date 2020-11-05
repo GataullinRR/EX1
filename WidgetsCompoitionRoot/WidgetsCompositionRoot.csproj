@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B7BF2CD8-30A8-46A1-80C3-F8FF06AB324F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WidgetsCompositionRoot</RootNamespace>
+    <AssemblyName>WidgetsCompositionRoot</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Proxies\DIContainerLoggingProxy.cs" />
+    <Compile Include="DICore.cs" />
+    <Compile Include="Proxies\DIInstantiationStrategyProxyBase.cs" />
+    <Compile Include="Base\IDICore.cs" />
+    <Compile Include="Base\IDIInstantiationStrategy.cs" />
+    <Compile Include="Base\IScopeProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DIContainer.cs" />
+    <Compile Include="SteppedDIInstantiationStrategy.cs" />
+    <Compile Include="Proxies\WidgetOrderPreservingDIInstantiationStrategyProxy.cs" />
+    <Compile Include="WidgetsLocator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\MVVMUtilities\MVVMUtilitiesStandard\MVVMUtilitiesStandard.csproj">
+      <Project>{559F4B6C-AB97-4508-934A-EC6C028520B9}</Project>
+      <Name>MVVMUtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\UtilitiesStandard\UtilitiesStandard.csproj">
+      <Project>{de0231db-ffff-4988-bf22-c1bbab0a37ad}</Project>
+      <Name>UtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFUtilities\WPFUtilities\WPFUtilities.csproj">
+      <Project>{115D86AE-B025-4BAD-9932-BEF1E9D9F9E8}</Project>
+      <Name>WPFUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Calibrators\Calibrators.csproj">
+      <Project>{9d2d0a58-50dc-4b4c-ac9c-8d4b1974c001}</Project>
+      <Name>Calibrators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandExports\CommandExports.csproj">
+      <Project>{7CA9F4F8-2375-4940-AFA2-0F6786690B17}</Project>
+      <Name>CommandExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommandWidget\CommandWidget.csproj">
+      <Project>{b30c95a6-1a7d-4cd1-85fe-36b45e7a649e}</Project>
+      <Name>CommandWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataRequestWidget\DataRequestWidget.csproj">
+      <Project>{74fc9705-8e81-4263-928e-7167a6056426}</Project>
+      <Name>DataRequestWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataViewExports\DataViewExports.csproj">
+      <Project>{081C920C-30D5-4DFE-8EB1-37D3782003D5}</Project>
+      <Name>DataViewExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataViewWidget\DataViewWidget.csproj">
+      <Project>{362ec55c-feae-404f-80ca-c9ed0a205341}</Project>
+      <Name>DataViewWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj">
+      <Project>{DD073C66-A15A-4295-B882-B04276F716BC}</Project>
+      <Name>DeviceBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceCalibrationWidget\CalibrationWidget.csproj">
+      <Project>{d9fe7b9b-45c3-4fce-9ea9-17c624cc9cb0}</Project>
+      <Name>CalibrationWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceStatusWidget\StatusWidget.csproj">
+      <Project>{6d7b94ca-83df-45f6-a998-275eed5dfa6c}</Project>
+      <Name>StatusWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExportersExports\ExportersExports.csproj">
+      <Project>{ACD063E1-90D6-43CF-8C0B-6130AAAAC043}</Project>
+      <Name>ExportersExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exporters\Exporters.csproj">
+      <Project>{4E786174-50D7-4BD4-99A2-94F3B3A1F7E4}</Project>
+      <Name>Exporters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FilesExports\FilesExports.csproj">
+      <Project>{1C74B110-715C-498C-9942-38ADE5C2F204}</Project>
+      <Name>FilesExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FilesWidget\FilesWidget.csproj">
+      <Project>{4f07b611-122c-4b9d-86ab-7b711363e41e}</Project>
+      <Name>FilesWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlashDumpLoaderExports\FlashDumpLoaderExports.csproj">
+      <Project>{36751930-2b26-4eeb-b0b8-6862e951f4c6}</Project>
+      <Name>FlashDumpLoaderExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlashDumpLoaderWidget\FlashDumpLoaderWidget.csproj">
+      <Project>{2e4c3bc6-94c7-4f9d-ae1c-049cbadd9776}</Project>
+      <Name>FlashDumpLoaderWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlashUploadWidget\FlashUploadWidget.csproj">
+      <Project>{32784497-626e-4be9-9d22-57ce3accf283}</Project>
+      <Name>FlashUploadWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HighLevelLoger\Common.csproj">
+      <Project>{8626dfd1-b8d7-444e-bae4-afbdb05e5aad}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InitializationExports\InitializationExports.csproj">
+      <Project>{a8b6ea77-01e2-4401-9306-13e1fdd3c727}</Project>
+      <Name>InitializationExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InitializationWidget\InitializationWidget.csproj">
+      <Project>{d057d691-4a0b-4f11-84c3-053f7b0ae2ea}</Project>
+      <Name>InitializationWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RUSManagingToolExports\RUSManagingToolExports.csproj">
+      <Project>{529E73C1-2F2F-4809-931E-B74271442120}</Project>
+      <Name>RUSManagingToolExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RUSModuleSetDirrectionWidget\RUSModuleSetDirectionWidget.csproj">
+      <Project>{fd071062-e2f2-47a4-8d5e-3344a7ce2e01}</Project>
+      <Name>RUSModuleSetDirectionWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RUSTelemetryStreamSenderWidget\RUSTelemetryStreamSenderWidget.csproj">
+      <Project>{bcfe0364-c2a9-43d7-ac62-0badc92b52ae}</Project>
+      <Name>RUSTelemetryStreamSenderWidget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RUSTelemetryStreamSender\RUSTelemetryStreamSenderExports.csproj">
+      <Project>{7265c468-078f-4e61-b9c4-83653ad900fd}</Project>
+      <Name>RUSTelemetryStreamSenderExports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewSettingsWidget\ViewSettingsWidget.csproj">
+      <Project>{941c3d40-b6bd-4e69-b592-8eebf30832ad}</Project>
+      <Name>ViewSettingsWidget</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

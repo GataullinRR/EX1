@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{418E2148-2443-430A-B136-1F772AB2B1E5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Entry</RootNamespace>
+    <AssemblyName>RUS - MT</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <ShouldCreateLogs>True</ShouldCreateLogs>
+    <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
+    <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
+    <UpdateAssemblyFileVersion>True</UpdateAssemblyFileVersion>
+    <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+    <AssemblyVersionSettings>None.None.None.Increment</AssemblyVersionSettings>
+    <UpdatePackageVersion>False</UpdatePackageVersion>
+    <AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+    <InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+    <AssemblyFileVersionSettings>None.None.None.Increment</AssemblyFileVersionSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>geofizika_IL4_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\CRC16\CRC16\CRC16.csproj">
+      <Project>{a442ab59-f179-4bd4-94bd-11748e4bfccb}</Project>
+      <Name>CRC16</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\DSPLib\DSPLib\DSP.csproj">
+      <Project>{32af0e39-defe-411a-b832-3ca1ba7c3633}</Project>
+      <Name>DSP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Logger\Logger.csproj">
+      <Project>{5e0a9736-b0d0-476f-b5b0-fdd56e3abc33}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\MVVMUtilities\MVVMUtilitiesStandard\MVVMUtilitiesStandard.csproj">
+      <Project>{559f4b6c-ab97-4508-934a-ec6c028520b9}</Project>
+      <Name>MVVMUtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\NetFrameworkUtilities\NetFrameworkUtilities.csproj">
+      <Project>{42d09205-63b1-4548-b6a6-f6d1569c2631}</Project>
+      <Name>NetFrameworkUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Utilities\UtilitiesStandard\UtilitiesStandard.csproj">
+      <Project>{de0231db-ffff-4988-bf22-c1bbab0a37ad}</Project>
+      <Name>UtilitiesStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\Vectors\Vectors.csproj">
+      <Project>{839c7d8a-8283-4969-95dd-5e961aa9f922}</Project>
+      <Name>Vectors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFControls\WPFControls.csproj">
+      <Project>{a927cb69-79e4-4d12-9c24-86c70530727a}</Project>
+      <Name>WPFControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\GeneralPurposeLibs\WPFUtilities\WPFUtilities.csproj">
+      <Project>{115d86ae-b025-4bad-9932-bef1e9d9f9e8}</Project>
+      <Name>WPFUtilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TinyConfig\SpecificMarshallers\SpecificMarshallers.csproj">
+      <Project>{c81897d7-c103-4191-8d89-acfee3adcf2d}</Project>
+      <Name>SpecificMarshallers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\TinyConfig\TinyConfig\TinyConfig.csproj">
+      <Project>{05bdf1d9-7bea-4711-ab5a-115a35cebf6c}</Project>
+      <Name>TinyConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\YandexDiskPublic\YandexDiskPublicAPIStandard\YandexDiskPublicAPIStandard.csproj">
+      <Project>{8f209219-e0e4-4f60-b866-b7272e26f594}</Project>
+      <Name>YandexDiskPublicAPIStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Calibrators\Calibrators.csproj">
+      <Project>{9d2d0a58-50dc-4b4c-ac9c-8d4b1974c001}</Project>
+      <Name>Calibrators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceBase\DeviceBase.csproj">
+      <Project>{dd073c66-a15a-4295-b882-b04276f716bc}</Project>
+      <Name>DeviceBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceManager\RUSManagingTool.csproj">
+      <Project>{5b76142b-9792-49ff-8870-7d0b11be7891}</Project>
+      <Name>RUSManagingTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HighLevelLoger\CommonServices.csproj">
+      <Project>{8626dfd1-b8d7-444e-bae4-afbdb05e5aad}</Project>
+      <Name>CommonServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualDevice\VirtualDevice.csproj">
+      <Project>{beb882db-886b-4cfb-a3b2-4b4f8b61e1bf}</Project>
+      <Name>VirtualDevice</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="geofizika_IL4_icon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
